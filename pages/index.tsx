@@ -678,7 +678,7 @@ export default function Home() {
                 </div>
                 <div className="price">
                   <p className="price-text">PRICE</p>
-                  <Box sx={{ width: "100%", marginTop: "1em" }}>
+                  <Box sx={{ marginTop: "1em" }}>
                     <Slider
                       getAriaLabel={() => "Price range"}
                       value={value}

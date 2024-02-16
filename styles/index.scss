@@ -104,6 +104,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6em 0;
+  @include respond(laptop) {
+    padding: 4em 0;
+  }
   @include respond(mini-tablet) {
     padding: 0;
   }
@@ -124,6 +127,9 @@ body {
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
+    @include respond(laptop) {
+      width: 90%;
+    }
     @include respond(mini-tablet) {
       width: 100%;
       min-height: 100vh;
@@ -870,6 +876,10 @@ body {
             color: $background-primary;
             border-radius: 1.5em;
             padding: 1.5em;
+            width: 35%;
+            @include respond(mini-tablet) {
+              width: 100%;
+            }
             .locs {
               display: flex;
               justify-content: space-between;
@@ -905,8 +915,14 @@ body {
                 display: flex;
                 justify-content: center;
               }
-              .img {
+              img {
                 width: 100%;
+                @include respond(laptop) {
+                  height: 8em;
+                }
+                @include respond(phone) {
+                  height: 100%;
+                }
               }
             }
             .stops {
@@ -915,6 +931,9 @@ body {
               align-items: center;
               margin-top: 1.5em;
               font-size: 0.75rem;
+              @include respond(laptop) {
+                font-size: 0.6rem;
+              }
               .non-stops {
                 display: flex;
                 justify-content: center;
