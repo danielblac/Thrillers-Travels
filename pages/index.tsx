@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { IoHomeOutline } from "react-icons/io5";
+import { IoHomeOutline, IoMenu, IoClose } from "react-icons/io5";
 import { LuPlane, LuWallet } from "react-icons/lu";
 import { HiOutlineNewspaper } from "react-icons/hi2";
 import { AiOutlinePieChart } from "react-icons/ai";
@@ -34,6 +34,7 @@ export default function Home() {
   const locationTwo = "MUMBAI (BOM)";
 
   // sTATES
+  const [menuOpen, setMenuOpen] = useState(false);
   const [dashboard, setDashboard] = useState(false);
   const [flights, setFlights] = useState(true);
   const [wallet, setWallet] = useState(false);
@@ -60,6 +61,7 @@ export default function Home() {
     setWallet(false);
     setStatistics(false);
     setSettings(false);
+    setMenuOpen(false);
   };
 
   const handleFlights = () => {
@@ -69,6 +71,7 @@ export default function Home() {
     setWallet(false);
     setStatistics(false);
     setSettings(false);
+    setMenuOpen(false);
   };
 
   const handleWallet = () => {
@@ -78,6 +81,7 @@ export default function Home() {
     setWallet(true);
     setStatistics(false);
     setSettings(false);
+    setMenuOpen(false);
   };
 
   const handleReports = () => {
@@ -87,6 +91,7 @@ export default function Home() {
     setWallet(false);
     setStatistics(false);
     setSettings(false);
+    setMenuOpen(false);
   };
 
   const handleStatistics = () => {
@@ -96,6 +101,7 @@ export default function Home() {
     setWallet(false);
     setStatistics(true);
     setSettings(false);
+    setMenuOpen(false);
   };
 
   const handleSettings = () => {
@@ -105,6 +111,7 @@ export default function Home() {
     setWallet(false);
     setStatistics(false);
     setSettings(true);
+    setMenuOpen(false);
   };
 
   const handleOneWay = () => {
@@ -242,7 +249,126 @@ export default function Home() {
           <Image src="/img/map-1.png" alt="profile" width={281} height={176} />
         </div>
       </div>
+      {menuOpen && (
+        <div className="sidebar-mobile">
+          <div className="side-header">
+            <div className="profile">
+              <Image
+                src="/img/profile.jpg"
+                alt="profile"
+                width={70}
+                height={70}
+              />
+            </div>
+            <h4>ALEX JOHNSON</h4>
+            <p>alex.johnson@gmail.com</p>
+          </div>
+          <div className="nav">
+            <div
+              className={dashboard ? "nav-active" : "nav-opt"}
+              onClick={handleDashboard}
+            >
+              <IoHomeOutline size={18} color="#d6a217" />
+              <p>DASHBOARD</p>
+            </div>
+            <div
+              className={flights ? "nav-active" : "nav-opt"}
+              onClick={handleFlights}
+            >
+              <LuPlane size={20} color="#d6a217" />
+              <p>FLIGHTS</p>
+            </div>
+            <div
+              className={wallet ? "nav-active" : "nav-opt"}
+              onClick={handleWallet}
+            >
+              <LuWallet size={18} color="#d6a217" />
+              <p>WALLET</p>
+            </div>
+            <div
+              className={reports ? "nav-active" : "nav-opt"}
+              onClick={handleReports}
+            >
+              <HiOutlineNewspaper size={20} color="#d6a217" />
+              <p>REPORTS</p>
+            </div>
+            <div
+              className={statistics ? "nav-active" : "nav-opt"}
+              onClick={handleStatistics}
+            >
+              <AiOutlinePieChart size={20} color="#d6a217" />
+              <p>STATISTICS</p>
+            </div>
+            <div
+              className={settings ? "nav-active" : "nav-opt"}
+              onClick={handleSettings}
+            >
+              <FiSettings size={20} color="#d6a217" />
+              <p>SETTINGS</p>
+            </div>
+          </div>
+          <div className="active-users">
+            <p className="users-text">ACTIVE USERS</p>
+            <div className="users">
+              <div className="user">
+                <Image
+                  src="/img/user-one.jpg"
+                  alt="profile"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div className="user user-shift">
+                <Image
+                  src="/img/user-two.png"
+                  alt="profile"
+                  width={70}
+                  height={70}
+                />
+              </div>
+              <div className="user user-shift">
+                <Image
+                  src="/img/profile.jpg"
+                  alt="profile"
+                  width={70}
+                  height={70}
+                />
+              </div>
+              <div className="user user-shift">
+                <Image
+                  src="/img/user-three.png"
+                  alt="profile"
+                  width={70}
+                  height={70}
+                />
+              </div>
+              <div className="user-shift plus">
+                <p>+78</p>
+              </div>
+            </div>
+          </div>
+          <div className="map">
+            <Image
+              src="/img/map-1.png"
+              alt="profile"
+              width={281}
+              height={176}
+            />
+          </div>
+        </div>
+      )}
       <main className="main-content">
+        <div className="menu">
+          {menuOpen ? (
+            <div onClick={() => setMenuOpen(false)}>
+              <IoClose size={30} />
+            </div>
+          ) : (
+            <div onClick={() => setMenuOpen(true)}>
+              <IoMenu size={30} />
+            </div>
+          )}
+        </div>
         {dashboard && (
           <div className="dashboard">
             <h1>DashBoard</h1>
@@ -286,39 +412,41 @@ export default function Home() {
                     </select>
                   </div>
                 </div>
-                <div className="date">
-                  <DatePicker
-                    selected={startDate}
-                    onChange={(date: any) => setStartDate(date)}
-                    minDate={new Date()}
-                    dateFormat="dd MMMM yyyy"
-                    showIcon
-                    toggleCalendarOnIconClick
-                    icon={
-                      <MdCalendarMonth
-                        style={{
-                          marginTop: "-4px",
-                          fontSize: "18px",
-                          marginLeft: "-5px",
-                        }}
-                      />
-                    }
-                    className="date-input"
-                  />
-                </div>
-                <div className="travellers">
-                  <FaUser />
-                  <select
-                    className="select"
-                    value={travellers}
-                    onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                      setTravellers(e.target.value)
-                    }
-                  >
-                    <option value="1 TRAVELLER">1 TRAVELLER</option>
-                    <option value="2 TRAVELLERS">2 TRAVELLERS</option>
-                    <option value="3 TRAVELLERS">3 TRAVELLERS</option>
-                  </select>
+                <div className="date-travel">
+                  <div className="date">
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date: any) => setStartDate(date)}
+                      minDate={new Date()}
+                      dateFormat="dd MMMM yyyy"
+                      showIcon
+                      toggleCalendarOnIconClick
+                      icon={
+                        <MdCalendarMonth
+                          style={{
+                            marginTop: "-4px",
+                            fontSize: "18px",
+                            marginLeft: "-5px",
+                          }}
+                        />
+                      }
+                      className="date-input"
+                    />
+                  </div>
+                  <div className="travellers">
+                    <FaUser />
+                    <select
+                      className="select"
+                      value={travellers}
+                      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                        setTravellers(e.target.value)
+                      }
+                    >
+                      <option value="1 TRAVELLER">1 TRAVELLER</option>
+                      <option value="2 TRAVELLERS">2 TRAVELLERS</option>
+                      <option value="3 TRAVELLERS">3 TRAVELLERS</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div className="lower-search">
@@ -346,21 +474,23 @@ export default function Home() {
                     <p>MULTI CITY</p>
                   </div>
                 </div>
-                <div className="flight-type">
-                  <FaUserTie />
-                  <select
-                    className="select"
-                    value={flightType}
-                    onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                      setFlightType(e.target.value)
-                    }
-                  >
-                    <option value="FIRST CLASS">FIRST CLASS</option>
-                    <option value="BUSINESS CLASS">BUSINESS CLASS</option>
-                    <option value="ECONOMY CLASS">ECONOMY CLASS</option>
-                  </select>
+                <div className="flight-btn">
+                  <div className="flight-type">
+                    <FaUserTie />
+                    <select
+                      className="select"
+                      value={flightType}
+                      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                        setFlightType(e.target.value)
+                      }
+                    >
+                      <option value="FIRST CLASS">FIRST CLASS</option>
+                      <option value="BUSINESS CLASS">BUSINESS CLASS</option>
+                      <option value="ECONOMY CLASS">ECONOMY CLASS</option>
+                    </select>
+                  </div>
+                  <div className="search-btn">SEARCH</div>
                 </div>
-                <div className="search-btn">SEARCH</div>
               </div>
             </div>
             <div className="result">

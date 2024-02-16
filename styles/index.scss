@@ -104,6 +104,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6em 0;
+  @include respond(mini-tablet) {
+    padding: 0;
+  }
   .bubble {
     position: absolute;
     width: 300px;
@@ -121,11 +124,173 @@ body {
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
+    @include respond(mini-tablet) {
+      width: 100%;
+      min-height: 100vh;
+      border-radius: 0;
+    }
     .sidebar {
       grid-column: span 1 / span 1;
       background-color: $color-primary;
       border-radius: 1.5em;
       color: $background-primary;
+      @include respond(mini-tablet) {
+        display: none;
+      }
+      .side-header {
+        padding-top: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .profile {
+          border-radius: 50%;
+          border-right-color: rgba(214, 163, 23, 0.5);
+          border-top-color: rgba(214, 163, 23, 0.7);
+          border-bottom-color: rgba(214, 163, 23, 0.3);
+          border-left-color: rgba(214, 163, 23, 0.1);
+          border-width: 3px;
+          border-style: solid;
+          height: 85px;
+          width: 85px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          /* To ratate */
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+          img {
+            border-radius: 50%;
+            transform: rotate(-45deg);
+          }
+        }
+        h4 {
+          margin-top: 0.7em;
+        }
+        p {
+          font-size: 10px;
+          margin-top: 0.5em;
+        }
+      }
+      .nav {
+        margin: 3em 0;
+        .nav-opt {
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          margin: 1.5em 0 1.5em 2em;
+          cursor: pointer;
+        }
+        .nav-active {
+          background: $background-main;
+          padding: 0.75em 0 0.75em 1em;
+          margin-left: 1em;
+          border-radius: 1.5em 0 0 1.5em;
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          cursor: pointer;
+          position: relative;
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+          }
+          &::before {
+            top: -3em;
+            right: -0.5px;
+            height: 3em;
+            width: 1.8em;
+            border-bottom-right-radius: 3em;
+            -moz-border-bottom-right-radius: 3em;
+            -webkit-border-bottom-right-radius: 3em;
+            -webkit-box-shadow: 0 1.5em 0 0 $background-main;
+            -moz-box-shadow: 0 1.5em 0 0 $background-main;
+            box-shadow: 0 1.5em 0 0 $background-main;
+          }
+          &::after {
+            top: 2.75em;
+            right: -0.5px;
+            height: 3em;
+            width: 1.8em;
+            border-top-right-radius: 3em;
+            -moz-border-top-right-radius: 3em;
+            -webkit-border-top-right-radius: 3em;
+            -webkit-box-shadow: 0 -1.5em 0 0 $background-main;
+            -moz-box-shadow: 0 -1.5em 0 0 $background-main;
+            box-shadow: 0 -1.5em 0 0 $background-main;
+          }
+          p {
+            color: $color-primary;
+          }
+        }
+      }
+      .active-users {
+        margin: 0 0 1em 2em;
+        .users-text {
+          font-size: 12px;
+          color: $color-secondary;
+        }
+        .users {
+          margin-top: 1em;
+          display: flex;
+          .user {
+            height: 2em;
+            width: 2em;
+            border-radius: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
+          .user-shift {
+            margin-left: -0.4em;
+            border: 2px solid $color-primary;
+          }
+          .plus {
+            background: $color-secondary;
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.5em;
+            height: 2.5em;
+            border-radius: 50%;
+          }
+        }
+      }
+      .map {
+        width: 80%;
+        height: 120px;
+        margin: 1em auto;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .sidebar-mobile {
+      grid-column: span 1 / span 1;
+      background-color: $color-primary;
+      border-radius: 1.5em;
+      color: $background-primary;
+      display: none;
+      @include respond(mini-tablet) {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        border-radius: 0;
+        height: 100%;
+        min-height: 100vh;
+        width: 60%;
+      }
       .side-header {
         padding-top: 2.5em;
         display: flex;
@@ -266,6 +431,18 @@ body {
     .main-content {
       grid-column: span 4 / span 4;
       padding: 1.5em;
+      @include respond(mini-tablet) {
+        grid-column: span 5 / span 5;
+      }
+      .menu {
+        display: none;
+        @include respond(mini-tablet) {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: -0.5em;
+          margin-bottom: 1em;
+        }
+      }
       .flights {
         .search {
           background-color: $background-primary;
@@ -277,6 +454,11 @@ body {
             align-items: center;
             gap: 1.5em;
             height: 3em;
+            @include respond(mini-tablet) {
+              flex-direction: column;
+              gap: 1em;
+              height: 7.5em;
+            }
             .locations {
               width: 50%;
               display: flex;
@@ -286,6 +468,9 @@ body {
               background-color: $background-main;
               height: 100%;
               padding: 0 0.7em;
+              @include respond(mini-tablet) {
+                width: 100%;
+              }
               .departure {
                 width: 41%;
                 display: flex;
@@ -343,46 +528,56 @@ body {
                 color: white;
               }
             }
-            .date {
-              width: 25%;
+            .date-travel {
+              width: 50%;
               display: flex;
               align-items: center;
-              border-radius: 1.5em;
-              background-color: $background-main;
+              gap: 1.5em;
               height: 100%;
-              padding: 0 0.7em;
-              .date-input {
+              @include respond(mini-tablet) {
                 width: 100%;
-                border: none;
-                background-color: inherit;
-                &:focus {
+              }
+              .date {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                border-radius: 1.5em;
+                background-color: $background-main;
+                height: 100%;
+                padding: 0 0.7em;
+                .date-input {
+                  width: 100%;
                   border: none;
-                  outline: none;
+                  background-color: inherit;
+                  &:focus {
+                    border: none;
+                    outline: none;
+                  }
                 }
               }
-            }
-            .travellers {
-              width: 25%;
-              display: flex;
-              align-items: center;
-              justify-content: space-around;
-              border-radius: 1.5em;
-              background-color: $background-main;
-              height: 100%;
-              padding: 0 0.7em;
-              .select {
-                width: 80%;
-                font-size: 12px;
-                border: none;
-                background-color: inherit;
-                &:focus {
-                  border: none;
-                  outline: none;
-                }
-                option {
-                  padding: 1em;
+              .travellers {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-radius: 1.5em;
+                background-color: $background-main;
+                height: 100%;
+                padding: 0 0.7em;
+                .select {
+                  width: 80%;
                   font-size: 12px;
-                  background-color: $background-main;
+                  border: none;
+                  background-color: inherit;
+                  &:focus {
+                    border: none;
+                    outline: none;
+                  }
+                  option {
+                    padding: 1em;
+                    font-size: 12px;
+                    background-color: $background-main;
+                  }
                 }
               }
             }
@@ -394,6 +589,11 @@ body {
             gap: 1.5em;
             margin-top: 1.5em;
             height: 3em;
+            @include respond(mini-tablet) {
+              flex-direction: column;
+              gap: 1em;
+              height: 7.5em;
+            }
             .trip-type {
               width: 50%;
               display: grid;
@@ -402,6 +602,9 @@ body {
               border-radius: 1.5em;
               background-color: $background-main;
               height: 100%;
+              @include respond(mini-tablet) {
+                width: 100%;
+              }
               .trip-type-norm {
                 display: flex;
                 justify-content: center;
@@ -420,40 +623,50 @@ body {
                 cursor: pointer;
               }
             }
-            .flight-type {
-              width: 25%;
+            .flight-btn {
+              width: 50%;
               display: flex;
               align-items: center;
-              justify-content: space-around;
-              border-radius: 1.5em;
-              background-color: $background-main;
+              gap: 1.5em;
               height: 100%;
-              padding: 0 0.7em;
-              .select {
-                width: 80%;
-                font-size: 12px;
-                border: none;
-                background-color: inherit;
-                &:focus {
-                  border: none;
-                  outline: none;
-                }
-                option {
-                  padding: 1em;
+              @include respond(mini-tablet) {
+                width: 100%;
+              }
+              .flight-type {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-radius: 1.5em;
+                background-color: $background-main;
+                height: 100%;
+                padding: 0 0.7em;
+                .select {
+                  width: 80%;
                   font-size: 12px;
-                  background-color: $background-main;
+                  border: none;
+                  background-color: inherit;
+                  &:focus {
+                    border: none;
+                    outline: none;
+                  }
+                  option {
+                    padding: 1em;
+                    font-size: 12px;
+                    background-color: $background-main;
+                  }
                 }
               }
-            }
-            .search-btn {
-              width: 25%;
-              display: flex;
-              align-items: center;
-              justify-content: space-around;
-              border-radius: 1.5em;
-              background-color: $color-secondary;
-              height: 100%;
-              padding: 0 0.7em;
+              .search-btn {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-radius: 1.5em;
+                background-color: $color-secondary;
+                height: 100%;
+                padding: 0 0.7em;
+              }
             }
           }
         }
@@ -464,9 +677,12 @@ body {
           padding: 1.5em 0;
           .result-no {
             font-weight: bold;
+            min-width: 25%;
+            font-size: 14px;
           }
           .result-inputs {
             display: flex;
+            align-items: center;
             gap: 1em;
             .filter-btn {
               min-width: 8em;
@@ -477,6 +693,10 @@ body {
               height: 2.5em;
               border-radius: 1.5em;
               font-size: 14px;
+              @include respond(mini-tablet) {
+                min-width: none;
+                font-size: 12px;
+              }
             }
             .select {
               min-width: 12em;
@@ -486,6 +706,10 @@ body {
               height: 2.5em;
               border-radius: 1.5em;
               padding-left: 1em;
+              @include respond(mini-tablet) {
+                min-width: none;
+                font-size: 12px;
+              }
               &:focus {
                 border: none;
                 outline: none;
@@ -500,9 +724,15 @@ body {
         .flight-details {
           display: flex;
           gap: 1.5em;
+          @include respond(mini-tablet) {
+            flex-direction: column;
+          }
           .flight-book {
             width: 65%;
             border-radius: 1.5em;
+            @include respond(mini-tablet) {
+              width: 100%;
+            }
             .first {
               border-top-left-radius: 1.5rem;
               border-top-right-radius: 1.5rem;
@@ -517,14 +747,18 @@ body {
               .logo-img {
                 width: 5em;
                 height: 3.25em;
+                @include respond(phone) {
+                  width: 3.5em;
+                  height: 1.8em;
+                }
                 img {
                   width: 100%;
                   height: 100%;
                 }
               }
               .logo-img-lu {
-                width: 5em;
-                height: 4em;
+                width: 3.5em;
+                height: 1.7em;
                 img {
                   width: 100%;
                   height: 100%;
@@ -534,21 +768,33 @@ body {
                 .place {
                   font-size: 1.5rem;
                   font-weight: 500;
+                  @include respond(mini-tablet) {
+                    font-size: 1rem;
+                  }
                 }
                 .time {
                   font-size: 0.75rem;
                   margin-top: 0.75em;
+                  @include respond(mini-tablet) {
+                    font-size: 0.6rem;
+                  }
                 }
               }
               .to {
                 .place {
                   font-size: 1.5rem;
                   font-weight: 500;
+                  @include respond(mini-tablet) {
+                    font-size: 1rem;
+                  }
                 }
                 .time {
                   font-size: 0.75rem;
                   margin-top: 0.75em;
                   text-align: end;
+                  @include respond(mini-tablet) {
+                    font-size: 0.6rem;
+                  }
                 }
               }
               .airline {
@@ -560,10 +806,16 @@ body {
                   font-size: 0.85rem;
                   color: $color-secondary;
                   margin-top: 0.4em;
+                  @include respond(mini-tablet) {
+                    font-size: 0.7rem;
+                  }
                 }
                 .airline-type {
                   font-size: 0.85rem;
                   margin-top: 0.4em;
+                  @include respond(mini-tablet) {
+                    font-size: 0.7rem;
+                  }
                 }
               }
               .book-placement {
@@ -579,6 +831,9 @@ body {
                   color: $background-primary;
                   padding: 0.6em 1em;
                   margin-top: 0.85em;
+                  @include respond(mini-tablet) {
+                    font-size: 0.6rem;
+                  }
                 }
               }
               .cut {
@@ -646,6 +901,10 @@ body {
             .maps {
               width: 100%;
               margin-top: 2.5em;
+              @include respond(mini-tablet) {
+                display: flex;
+                justify-content: center;
+              }
               .img {
                 width: 100%;
               }
