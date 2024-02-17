@@ -579,9 +579,9 @@ export default function Home() {
                   <div className="bottom right cut"></div>
                 </div>
                 <div className="booking center">
-                  <div className="logo-img-lu">
+                  <div className="logo-img">
                     <Image
-                      src="/img/luftansa.png"
+                      src="/img/lufthansa.png"
                       alt="profile"
                       width={75}
                       height={75}
@@ -614,7 +614,7 @@ export default function Home() {
                 <div className="booking last">
                   <div className="logo-img">
                     <Image
-                      src="/img/qatar.png"
+                      src="/img/emirates.png"
                       alt="profile"
                       width={75}
                       height={50}
